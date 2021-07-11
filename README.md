@@ -4,6 +4,15 @@
 
 Powered by SoC CC2530, the sensor is based on a capacitive measurement method. The sensor is powered by a CR 2450 battery (CR 2477).
 
+
+#### Donate to me: https://paypal.me/efektalab or just buy to support this project
+
+#### Sale:
+
+#### Video:
+
+More info at http://efektalab.com/eON_PWS_Z
+
 ---
 
 ### Components:
