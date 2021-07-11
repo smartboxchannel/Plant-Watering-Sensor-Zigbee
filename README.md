@@ -20,6 +20,8 @@ Powered by SoC CC2530, the sensor is based on a capacitive measurement method. T
 
 https://github.com/ZigDevWiki/zigdevwiki.github.io/blob/main/docs/Begin/IAR_install.md
 
+https://github.com/sigma7i/zigbee-wiki/wiki/zigbee-firmware-install (RU)
+
 ---
 
 ### How to add support yourself
