@@ -6,7 +6,13 @@ Powered by SoC CC2530, the sensor is based on a capacitive measurement method. T
 
 ---
 
-### How to flash the device yourself
+### How to flash the device
+
+1. Download the Smart RF Flash Programmer V1 https://www.ti.com/tool/FLASH-PROGRAMMER
+
+2. Open the application select the HEX firmware file
+
+3. Connect the device with wires to CCDebugger, first erase the chip, then flash it.
 
 ---
 
