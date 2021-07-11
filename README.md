@@ -24,7 +24,7 @@ Move the device near to your coordinator (about 1 meter).
 or if you cannot disable routers (for example, internal switches), you may try the following:
 
 Disconnect an external antenna from your coordinator.
-Move a device to your coordinator closely (1-3 centimeters).
+Move a device to your coordinator closely (<1meter).
 Power on, power on the device.
 Restart your coordinator (for example, restart Zigbee2MQTT if you use it).
 
