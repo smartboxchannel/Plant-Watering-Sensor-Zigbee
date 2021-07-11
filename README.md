@@ -6,6 +6,10 @@ Powered by SoC CC2530, the sensor is based on a capacitive measurement method. T
 
 ---
 
+### Components:
+
+---
+
 ### How to flash the device
 
 1. Download the Smart RF Flash Programmer V1 https://www.ti.com/tool/FLASH-PROGRAMMER
