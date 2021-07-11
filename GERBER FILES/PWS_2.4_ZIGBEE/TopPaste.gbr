@@ -1,0 +1,21 @@
+G04 DipTrace 3.2.0.1*
+G04 TopPaste.gbr*
+%MOIN*%
+G04 #@! TF.FileFunction,Paste,Top*
+G04 #@! TF.Part,Single*
+%ADD55O,0.700787X0.740157*%
+%ADD57R,0.267717X0.114173*%
+%FSLAX26Y26*%
+G04*
+G70*
+G90*
+G75*
+G01*
+G04 TopPaste*
+%LPD*%
+D57*
+X0Y809252D3*
+Y-307283D3*
+D55*
+Y250984D3*
+M02*
