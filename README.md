@@ -11,6 +11,10 @@ Powered by SoC CC2530, the sensor is based on a capacitive measurement method. T
 
 #### Video: https://youtu.be/DzgeWvG4MEI
 
+#### Telegram ZigDev - https://t.me/zigdev
+
+#### Telegram DiyDev - https://t.me/diy_devices
+
 More info at http://efektalab.com/eON_PWS_Z
 
 ---
