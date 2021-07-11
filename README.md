@@ -16,6 +16,7 @@ More info at http://efektalab.com/eON_PWS_Z
 ---
 
 ### Components:
+##### (Soldering time: 10-15 minutes.)
 
 CC2530 E18-MS1-PCB - https://ali.ski/v8RP7i (10pcs)
 
@@ -41,7 +42,6 @@ IRLML6402TRPBF - https://ali.ski/_iNbX
 
 Micro Screws M1.4 5mm - https://ali.ski/gaFdO
 
-#####Soldering time: 10-15 minutes.
 
 ---
 
