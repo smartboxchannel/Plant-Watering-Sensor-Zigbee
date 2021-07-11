@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workspace>
+    <project>
+        <path>$WS_DIR$\GenericApp.ewp</path>
+    </project>
+    <batchBuild>
+        <batchDefinition>
+            <name>ALL</name>
+            <member>
+                <project>GenericApp</project>
+                <configuration>DIYRuZ_Flower</configuration>
+            </member>
+        </batchDefinition>
+    </batchBuild>
+</workspace>
