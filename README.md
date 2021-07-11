@@ -4,7 +4,14 @@
 
 Powered by SoC CC2530, the sensor is based on a capacitive measurement method. The sensor is powered by a CR 2450 battery (CR 2477).
 
+---
 
+### How to add support yourself
+
+1.  https://github.com/smartboxchannel/Plant-Watering-Sensor-Zigbee/blob/main/Z2M%20CONVERTER/README.md
+2.  https://github.com/smartboxchannel/Plant-Watering-Sensor-Zigbee/blob/main/majordomo-zigbee2mqtt/README.md (MJD https://mjdm.ru/)
+
+---
 
 ### How to join:
 #### If device in FN(factory new) state:
