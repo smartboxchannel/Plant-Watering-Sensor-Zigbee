@@ -6,6 +6,16 @@ Powered by SoC CC2530, the sensor is based on a capacitive measurement method. T
 
 ---
 
+### How to flash the device yourself
+
+---
+
+### How to install IAR
+
+https://github.com/ZigDevWiki/zigdevwiki.github.io/blob/main/docs/Begin/IAR_install.md
+
+---
+
 ### How to add support yourself
 
 1.  https://github.com/smartboxchannel/Plant-Watering-Sensor-Zigbee/blob/main/Z2M%20CONVERTER/README.md
