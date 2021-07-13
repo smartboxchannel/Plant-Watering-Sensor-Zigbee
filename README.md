@@ -75,10 +75,9 @@ https://github.com/sigma7i/zigbee-wiki/wiki/zigbee-firmware-install (RU)
 
 ---
 
-### How to add support yourself
+### How to add support yourself in MJD
 
-1.  https://github.com/smartboxchannel/Plant-Watering-Sensor-Zigbee/blob/main/Z2M%20CONVERTER/README.md
-2.  https://github.com/smartboxchannel/Plant-Watering-Sensor-Zigbee/blob/main/majordomo-zigbee2mqtt/README.md (MJD https://mjdm.ru/)
+1.  https://github.com/smartboxchannel/Plant-Watering-Sensor-Zigbee/blob/main/majordomo-zigbee2mqtt/README.md (MJD https://mjdm.ru/)
 
 ---
 
