@@ -249,7 +249,9 @@ if (abs(zclApp_SoilHumiditySensor_MeasuredValue - zclApp_SoilHumiditySensor_Meas
 
 static void zclApp_IntTempSens(void) {
     int16 temp = readTemperature();
-    if (abs(temp - temp_old) >= tempTr * 50) {
+    temp = temp/100;
+    temp = temp*100;
+    if (abs(temp - temp_old) >= tempTr * 100) {
       temp_old = temp;
         zclApp_Temperature_Sensor_MeasuredValue = temp;
         LREP("ReadIntTempSens t=%d\r\n", zclApp_Temperature_Sensor_MeasuredValue);
