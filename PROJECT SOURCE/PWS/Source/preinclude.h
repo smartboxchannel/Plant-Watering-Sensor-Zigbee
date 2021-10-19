@@ -60,6 +60,13 @@
 
 #endif
 
+//#define PWS_MINI
+//#define REPERT_0_5HOUR
+//#define REPERT_1HOUR
+//#define REPERT_1_5HOURS
+#define REPERT_2HOURS
+//#define REPERT_3HOURS
+
 
 #ifdef DO_DEBUG_UART
 #define HAL_UART TRUE

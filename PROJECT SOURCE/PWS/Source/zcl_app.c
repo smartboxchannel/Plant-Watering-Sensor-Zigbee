@@ -84,6 +84,9 @@ byte zclApp_TaskID;
 static uint8 currentSensorsReadingPhase = 0;
 int16 temp_old = 0;
 int16 tempTr = 1;
+int16 startWork = 0;
+int16 sendBattCount = 0;
+bool pushBut = false;
 /*********************************************************************
  * LOCAL FUNCTIONS
  */
@@ -91,7 +94,9 @@ static void zclApp_HandleKeys(byte shift, byte keys);
 static void zclApp_Report(void);
 
 static void zclApp_ReadSensors(void);
+#ifndef PWS_MINI 
 static void zclApp_IntTempSens(void);
+#endif
 static void zclApp_ReadSoilHumidity(void);
 static void zclApp_InitPWM(void);
 
@@ -168,11 +173,12 @@ uint16 zclApp_event_loop(uint8 task_id, uint16 events) {
     if (events & APP_READ_SENSORS_EVT) {
         LREPMaster("APP_READ_SENSORS_EVT\r\n");
         zclApp_ReadSensors();
+        pushBut = true;
         return (events ^ APP_READ_SENSORS_EVT);
     }
 
     // Discard unknown events
-    return 0;
+    return 0; 
 }
 
 static void zclApp_HandleKeys(byte portAndAction, byte keyCode) {
@@ -214,16 +220,45 @@ static void zclApp_ReadSensors(void) {
     switch (currentSensorsReadingPhase++) {
     case 0:
         POWER_ON_SENSORS();
-        zclBattery_Report();
-        zclApp_ReadSoilHumidity();
         break;
-       
+        
     case 1:
-        zclApp_IntTempSens();
+      if(startWork <= 5){
+        startWork++;
+        zclBattery_Report();
+        pushBut = true;
+      }
+      
+      if(startWork == 6){
+      sendBattCount++;
+      if(sendBattCount == 3){
+        zclBattery_Report();
+        sendBattCount = 0;
+        pushBut = true;
+      }else{
+        if(pushBut){
+          zclBattery_Report();
+          sendBattCount = 0;
+        }
+      }
+      }
+      
+      zclApp_ReadSoilHumidity();
+      break;
+       
+    case 2:
+        POWER_OFF_SENSORS();
         break;
 
+#ifndef PWS_MINI        
+     case 3:
+        zclApp_IntTempSens();
+        if(pushBut == true){
+        pushBut = false;
+        }
+        break; 
+#endif
     default:
-        POWER_OFF_SENSORS();
         currentSensorsReadingPhase = 0;
         break;
     }
@@ -231,6 +266,7 @@ static void zclApp_ReadSensors(void) {
         osal_start_timerEx(zclApp_TaskID, APP_READ_SENSORS_EVT, 10);
     }
 }
+
 
 static void zclApp_ReadSoilHumidity(void) {
     zclApp_SoilHumiditySensor_MeasuredValueRawAdc = adcReadSampled(SOIL_MOISTURE_PIN, HAL_ADC_RESOLUTION_14, HAL_ADC_REF_AVDD, 5);
@@ -241,23 +277,38 @@ static void zclApp_ReadSoilHumidity(void) {
     zclApp_SoilHumiditySensor_MeasuredValue =
         (uint16)mapRange(soilHumidityMinRangeAir, soilHumidityMaxRangeWater, 0.0, 10000.0, zclApp_SoilHumiditySensor_MeasuredValueRawAdc);
     LREP("ReadSoilHumidity raw=%d mapped=%d\r\n", zclApp_SoilHumiditySensor_MeasuredValueRawAdc, zclApp_SoilHumiditySensor_MeasuredValue);
-if (abs(zclApp_SoilHumiditySensor_MeasuredValue - zclApp_SoilHumiditySensor_MeasuredValue_old) >= zclApp_SoilHumiditySensor_MeasuredValueTr *100) {
-  zclApp_SoilHumiditySensor_MeasuredValue_old = zclApp_SoilHumiditySensor_MeasuredValue;
-    bdb_RepChangedAttrValue(zclApp_FirstEP.EndPoint, SOIL_HUMIDITY, ATTRID_MS_RELATIVE_HUMIDITY_MEASURED_VALUE);
-}
+    
+    if(!pushBut){
+    if (abs(zclApp_SoilHumiditySensor_MeasuredValue - zclApp_SoilHumiditySensor_MeasuredValue_old) >= zclApp_SoilHumiditySensor_MeasuredValueTr *100) {
+      zclApp_SoilHumiditySensor_MeasuredValue_old = zclApp_SoilHumiditySensor_MeasuredValue;
+      bdb_RepChangedAttrValue(zclApp_FirstEP.EndPoint, SOIL_HUMIDITY, ATTRID_MS_RELATIVE_HUMIDITY_MEASURED_VALUE);
+    }
+    }else{
+      zclApp_SoilHumiditySensor_MeasuredValue_old = zclApp_SoilHumiditySensor_MeasuredValue;
+      bdb_RepChangedAttrValue(zclApp_FirstEP.EndPoint, SOIL_HUMIDITY, ATTRID_MS_RELATIVE_HUMIDITY_MEASURED_VALUE);
+    }
 }
 
+#ifndef PWS_MINI 
 static void zclApp_IntTempSens(void) {
     int16 temp = readTemperature();
     temp = temp/100;
     temp = temp*100;
+    if(!pushBut){
     if (abs(temp - temp_old) >= tempTr * 100) {
       temp_old = temp;
         zclApp_Temperature_Sensor_MeasuredValue = temp;
         LREP("ReadIntTempSens t=%d\r\n", zclApp_Temperature_Sensor_MeasuredValue);
         bdb_RepChangedAttrValue(zclApp_FirstEP.EndPoint, TEMP, ATTRID_MS_TEMPERATURE_MEASURED_VALUE);
     }
+    }else{
+      temp_old = temp;
+      zclApp_Temperature_Sensor_MeasuredValue = temp;
+      LREP("ReadIntTempSens t=%d\r\n", zclApp_Temperature_Sensor_MeasuredValue);
+      bdb_RepChangedAttrValue(zclApp_FirstEP.EndPoint, TEMP, ATTRID_MS_TEMPERATURE_MEASURED_VALUE);
+    }
 }
+#endif
 
 static void _delay_us(uint16 microSecs) {
     while (microSecs--) {
@@ -271,6 +322,8 @@ static void _delay_us(uint16 microSecs) {
         asm("NOP");
     }
 }
+
+
 
 void user_delay_ms(uint32_t period) { _delay_us(1000 * period); }
 

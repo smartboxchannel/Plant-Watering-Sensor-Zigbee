@@ -22,13 +22,30 @@ extern "C" {
 
 
 
+#ifdef PWS_MINI
+#define AIR_COMPENSATION_FORMULA(ADC)   ((0.179 * (double)ADC + 3500.0))
+#define WATER_COMPENSATION_FORMULA(ADC) ((0.146 * (double)ADC + 1900.0))
+#else
+#define AIR_COMPENSATION_FORMULA(ADC)   ((0.179 * (double)ADC + 3140.0))
+#define WATER_COMPENSATION_FORMULA(ADC) ((0.146 * (double)ADC + 1980.0))
+#endif
 
-#define AIR_COMPENSATION_FORMULA(ADC)   ((0.179 * (double)ADC + 3000.0))
-#define WATER_COMPENSATION_FORMULA(ADC) ((0.146 * (double)ADC + 2000.0))
+#ifdef REPERT_0_5HOUR
+   #define APP_REPORT_DELAY ((uint32) 1800000) //30 minutes
+#endif
+#ifdef REPERT_1HOUR
+   #define APP_REPORT_DELAY ((uint32) 3600000) //1 hour
+#endif
+#ifdef REPERT_1_5HOURS
+   #define APP_REPORT_DELAY ((uint32) 5400000) //90 minutes
+#endif
+#ifdef REPERT_2HOURS
+   #define APP_REPORT_DELAY ((uint32) 7200000) //2 hours
+#endif
+#ifdef REPERT_3HOURS
+   #define APP_REPORT_DELAY ((uint32) 7200000) //3 hours
+#endif
 
-
-
-#define APP_REPORT_DELAY ((uint32) 10800000) //3 hours
 
 
 /*********************************************************************
@@ -81,6 +98,7 @@ extern CONST uint8 zclApp_AttrsFirstEPCount;
 extern const uint8 zclApp_ManufacturerName[];
 extern const uint8 zclApp_ModelId[];
 extern const uint8 zclApp_PowerSource;
+
 
 // APP_TODO: Declare application specific attributes here
 
