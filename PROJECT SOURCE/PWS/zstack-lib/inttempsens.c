@@ -1,5 +1,8 @@
 #include "inttempsens.h"
 
+#include "hal_adc.h"
+
+
 #define HAL_ADC_EOC 0x80 // End of Conversion bit
 #define HAL_ADC_START 0x40 // Starts Conversion
 #define HAL_ADC_RESOLUTION_8 0x01
@@ -20,9 +23,7 @@
 
 
 
-
 int16 readTemperature(void) {
-  
   
   float temperature;
   uint16 value;
@@ -31,42 +32,17 @@ int16 readTemperature(void) {
   TR0  |= 0x01;
   ADCIF = 0;
   
- 
   //ADCCON3 = (HAL_ADC_REF_125V | HAL_ADC_DEC_256 | HAL_ADC_CHN_TEMP);
-ADCCON3 = 0x3E; // temp
+  ADCCON3 = 0x3E; // temp
   while(!ADCIF);
   ADCIF=0;
   value=ADCL;
   value|=((uint16) ADCH)<<8;
   value >>=4;
 
- 
- 
-  //temperature = ((((float)value) * 1150.0 / 2047.0 - 743.0) / 2.45);
-temperature = (((float)value)-1367.5)/4.5+8.5;
+  temperature = (((float)value)-1367.5)/4.5+6.5;
  
   return (int16)(temperature * 100);
-  
-  /*
-  static uint16 reference_voltage;
-  static uint8 bCalibrate=TRUE;
-  uint16 value;
-  uint16 temperature;
-  ATEST=0x01;  
-  TR0|=0x01;  
-  ADCIF=0;
-  ADCCON3=(HAL_ADC_REF_125V|HAL_ADC_DEC_256|HAL_ADC_CHN_TEMP);
-  while(!ADCIF);
-  ADCIF=0;
-  value=ADCL;
-  value|=((uint16) ADCH)<<8;
-  value >>=4;
-  if(bCalibrate)        
-  {
-    reference_voltage=value;
-    bCalibrate=FALSE;
-  }
-  temperature=22+((value-reference_voltage)/4+1);   //??????
-  return (int16)(temperature * 100);
-*/
 }
+
+
