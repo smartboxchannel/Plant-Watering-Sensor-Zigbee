@@ -42,7 +42,7 @@ static void zclCommissioning_ResetBackoffRetry(void) {
 static void zclCommissioning_OnConnect(void) {
     LREPMaster("zclCommissioning_OnConnect \r\n");
     zclCommissioning_ResetBackoffRetry();
-    osal_start_timerEx(zclCommissioning_TaskId, APP_COMMISSIONING_CLOCK_DOWN_POLING_RATE_EVT, 10 * 1000);
+    osal_start_timerEx(zclCommissioning_TaskId, APP_COMMISSIONING_CLOCK_DOWN_POLING_RATE_EVT, 30 * 1000);
 }
 
 static void zclCommissioning_ProcessCommissioningStatus(bdbCommissioningModeMsg_t *bdbCommissioningModeMsg) {
@@ -54,7 +54,7 @@ static void zclCommissioning_ProcessCommissioningStatus(bdbCommissioningModeMsg_
         switch (bdbCommissioningModeMsg->bdbCommissioningStatus) {
         case BDB_COMMISSIONING_NO_NETWORK:
             LREP("No network\r\n");
-            HalLedBlink(HAL_LED_1, 3, 50, 500);
+            HalLedBlink(HAL_LED_1, 2, 100, 800);
             break;
         case BDB_COMMISSIONING_NETWORK_RESTORED:
             zclCommissioning_OnConnect();
@@ -66,7 +66,7 @@ static void zclCommissioning_ProcessCommissioningStatus(bdbCommissioningModeMsg_
     case BDB_COMMISSIONING_NWK_STEERING:
         switch (bdbCommissioningModeMsg->bdbCommissioningStatus) {
         case BDB_COMMISSIONING_SUCCESS:
-            HalLedBlink(HAL_LED_1, 5, 50, 500);
+            HalLedBlink(HAL_LED_1, 5, 80, 600);
             LREPMaster("BDB_COMMISSIONING_SUCCESS\r\n");
             zclCommissioning_OnConnect();
             break;
@@ -188,6 +188,6 @@ void zclCommissioning_HandleKeys(uint8 portAndAction, uint8 keyCode) {
 #endif
     }
     #if defined(POWER_SAVING)
-        NLME_SetPollRate(1);
+        NLME_SetPollRate(0);
     #endif
 }

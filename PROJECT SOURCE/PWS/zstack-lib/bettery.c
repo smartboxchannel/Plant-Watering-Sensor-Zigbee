@@ -13,6 +13,7 @@
 #define MULTI (float)0.443
 
 #define VOLTAGE_MIN 2.0
+
 #define VOLTAGE_MAX 3.3
 
 #ifndef ZCL_BATTERY_REPORT_INTERVAL
@@ -75,9 +76,7 @@ void zclBattery_Report(void) {
     uint16 millivolts = getBatteryVoltage();
     zclBattery_Voltage = getBatteryVoltageZCL(millivolts);
     zclBattery_PercentageRemainig = ZCL_BATTERY_REPORT_REPORT_CONVERTER(millivolts);
-
     LREP("Battery voltageZCL=%d prc=%d voltage=%d\r\n", zclBattery_Voltage, zclBattery_PercentageRemainig, millivolts);
-
 #if BDB_REPORTING
     bdb_RepChangedAttrValue(1, POWER_CFG, ATTRID_POWER_CFG_BATTERY_PERCENTAGE_REMAINING);
 #else
