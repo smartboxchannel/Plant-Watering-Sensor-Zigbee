@@ -26,29 +26,36 @@
 #define HAL_BUZZER FALSE
 
 #define HAL_LED TRUE
-#define HAL_I2C TRUE
+//#define HAL_I2C TRUE
 #define BLINK_LEDS TRUE
 
 
-#if !defined HAL_BOARD_THP
+
+
+#if !defined HAL_BOARD_PWS
 #error "Board type must be defined"
 #endif
 
 #define BDB_MAX_CLUSTERENDPOINTS_REPORTING 10
 
-#define BME280_32BIT_ENABLE
+#define SOIL_MOISTURE_PORT 0
+#define SOIL_MOISTURE_PIN 4
 
 #define POWER_SAVING
-
 // #define DO_DEBUG_UART
 
+//#define PWS_MINI
+//#define REPORT_0_5HOUR
+//#define REPORT_1HOUR
+//#define REPORT_1_5HOURS
+#define REPORT_2HOURS
+//#define REPORT_3HOURS
 
-//i2c bme280
-#define OCM_CLK_PORT 0
-#define OCM_DATA_PORT 0
-#define OCM_CLK_PIN 5
-#define OCM_DATA_PIN 6
 
+
+#ifdef PWS_MINI
+#define APP_TX_POWER TX_PWR_PLUS_2
+#endif
 
 #ifdef DO_DEBUG_UART
 #define HAL_UART TRUE
@@ -79,11 +86,7 @@
 
 #endif
 
-
 #define HAL_KEY_P2_INPUT_PINS BV(0)
-
-#define OUTDOOR_LONG_RANGE
-//#define BMP
 
 #include "hal_board_cfg.h"
 
