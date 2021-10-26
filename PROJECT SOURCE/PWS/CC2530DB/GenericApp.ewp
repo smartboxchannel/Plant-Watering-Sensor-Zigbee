@@ -2,7 +2,7 @@
 <project>
     <fileVersion>3</fileVersion>
     <configuration>
-        <name>THP</name>
+        <name>PWS</name>
         <toolchain>
             <name>8051</name>
         </toolchain>
@@ -113,15 +113,15 @@
                 </option>
                 <option>
                     <name>ExePath</name>
-                    <state>THP\Exe</state>
+                    <state>PWS\Exe</state>
                 </option>
                 <option>
                     <name>ObjPath</name>
-                    <state>THP\Obj</state>
+                    <state>PWS\Obj</state>
                 </option>
                 <option>
                     <name>ListPath</name>
-                    <state>THP\List</state>
+                    <state>PWS\List</state>
                 </option>
                 <option>
                     <name>GOutputBinary</name>
@@ -305,7 +305,7 @@
                 </option>
                 <option>
                     <name>CCDefines</name>
-                    <state>HAL_BOARD_THP</state>
+                    <state>HAL_BOARD_PWS</state>
                 </option>
                 <option>
                     <name>CCPreprocFile</name>
@@ -1145,15 +1145,6 @@
     <group>
         <name>App</name>
         <file>
-            <name>$PROJ_DIR$\..\BME280_driver\bme280.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\BME280_driver\bme280.h</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\BME280_driver\bme280_defs.h</name>
-        </file>
-        <file>
             <name>$PROJ_DIR$\..\zstack-lib\hal_key.c</name>
         </file>
         <file>
@@ -1236,6 +1227,9 @@
         </group>
         <group>
             <name>Include</name>
+            <file>
+                <name>$PROJ_DIR$\..\Source\hal\ds18b20.h</name>
+            </file>
             <file>
                 <name>$PROJ_DIR$\..\..\..\..\..\Components\hal\include\hal_adc.h</name>
             </file>
@@ -1726,7 +1720,8 @@
         <file>
             <name>$PROJ_DIR$\..\..\..\Tools\CC2530DB\f8wCoord.cfg</name>
             <excluded>
-                <configuration>DIYRuZ_Flower</configuration>
+                <configuration>CHDTECH_DEV</configuration>
+                <configuration>PWS</configuration>
             </excluded>
         </file>
         <file>
@@ -1735,7 +1730,8 @@
         <file>
             <name>$PROJ_DIR$\..\..\..\Tools\CC2530DB\f8wRouter.cfg</name>
             <excluded>
-                <configuration>DIYRuZ_Flower</configuration>
+                <configuration>CHDTECH_DEV</configuration>
+                <configuration>PWS</configuration>
             </excluded>
         </file>
         <file>
@@ -1845,6 +1841,12 @@
         </file>
         <file>
             <name>$PROJ_DIR$\..\zstack-lib\hal_i2c.h</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\zstack-lib\inttempsens.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\zstack-lib\inttempsens.h</name>
         </file>
         <file>
             <name>$PROJ_DIR$\..\zstack-lib\utils.c</name>
