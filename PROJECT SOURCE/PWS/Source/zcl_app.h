@@ -21,29 +21,10 @@ extern "C" {
 #define APP_READ_SENSORS_EVT            0x0002
 
 
-
-#ifdef PWS_MINI
-#define AIR_COMPENSATION_FORMULA(ADC)   ((0.179 * (double)ADC + 3500.0))
-#define WATER_COMPENSATION_FORMULA(ADC) ((0.146 * (double)ADC + 1900.0))
+#ifdef OUTDOOR_LONG_RANGE
+#define APP_REPORT_DELAY ((uint32) 300000) //5 minutes
 #else
-#define AIR_COMPENSATION_FORMULA(ADC)   ((0.179 * (double)ADC + 3140.0))
-#define WATER_COMPENSATION_FORMULA(ADC) ((0.146 * (double)ADC + 1980.0))
-#endif
-
-#ifdef REPERT_0_5HOUR
-   #define APP_REPORT_DELAY ((uint32) 1800000) //30 minutes
-#endif
-#ifdef REPERT_1HOUR
-   #define APP_REPORT_DELAY ((uint32) 3600000) //1 hour
-#endif
-#ifdef REPERT_1_5HOURS
-   #define APP_REPORT_DELAY ((uint32) 5400000) //90 minutes
-#endif
-#ifdef REPERT_2HOURS
-   #define APP_REPORT_DELAY ((uint32) 7200000) //2 hours
-#endif
-#ifdef REPERT_3HOURS
-   #define APP_REPORT_DELAY ((uint32) 7200000) //3 hours
+#define APP_REPORT_DELAY ((uint32) 60000) //1 minute  
 #endif
 
 
@@ -58,7 +39,10 @@ extern "C" {
 #define BASIC       ZCL_CLUSTER_ID_GEN_BASIC
 #define POWER_CFG   ZCL_CLUSTER_ID_GEN_POWER_CFG
 #define TEMP        ZCL_CLUSTER_ID_MS_TEMPERATURE_MEASUREMENT
-#define SOIL_HUMIDITY                  0x0408
+#define HUMIDITY    ZCL_CLUSTER_ID_MS_RELATIVE_HUMIDITY
+//#define SOIL_HUMIDITY                  0x0408
+#define PRESSURE    ZCL_CLUSTER_ID_MS_PRESSURE_MEASUREMENT
+//#define ILLUMINANCE ZCL_CLUSTER_ID_MS_ILLUMINANCE_MEASUREMENT
 
 #define ZCL_UINT8   ZCL_DATATYPE_UINT8
 #define ZCL_UINT16  ZCL_DATATYPE_UINT16
@@ -81,24 +65,32 @@ extern "C" {
  */
 
 extern SimpleDescriptionFormat_t zclApp_FirstEP;
+//extern SimpleDescriptionFormat_t zclApp_SecondEP;
 
 extern uint8 zclApp_BatteryVoltage;
 extern uint8 zclApp_BatteryPercentageRemainig;
 extern uint16 zclApp_BatteryVoltageRawAdc;
 extern int16 zclApp_Temperature_Sensor_MeasuredValue;
-extern uint16 zclApp_SoilHumiditySensor_MeasuredValue;
-extern uint16 zclApp_SoilHumiditySensor_MeasuredValue_old;
-extern uint16 zclApp_SoilHumiditySensor_MeasuredValueTr;
-extern uint16 zclApp_SoilHumiditySensor_MeasuredValueRawAdc;
+extern int16 zclApp_PressureSensor_MeasuredValue;
+extern int16 zclApp_PressureSensor_ScaledValue;
+extern int8 zclApp_PressureSensor_Scale;
+extern uint16 zclApp_HumiditySensor_MeasuredValue;
+//extern int16 zclApp_DS18B20_MeasuredValue;
+//extern uint16 zclApp_SoilHumiditySensor_MeasuredValue;
+//extern uint16 zclApp_SoilHumiditySensor_MeasuredValueRawAdc;
+//extern uint16 zclApp_IlluminanceSensor_MeasuredValue;
+//extern uint16 zclApp_IlluminanceSensor_MeasuredValueRawAdc;
 
 // attribute list
 extern CONST zclAttrRec_t zclApp_AttrsFirstEP[];
+//extern CONST zclAttrRec_t zclApp_AttrsSecondEP[];
+//extern CONST uint8 zclApp_AttrsSecondEPCount;
 extern CONST uint8 zclApp_AttrsFirstEPCount;
+
 
 extern const uint8 zclApp_ManufacturerName[];
 extern const uint8 zclApp_ModelId[];
 extern const uint8 zclApp_PowerSource;
-
 
 // APP_TODO: Declare application specific attributes here
 

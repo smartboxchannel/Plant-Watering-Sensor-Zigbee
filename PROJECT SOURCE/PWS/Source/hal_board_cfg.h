@@ -11,8 +11,10 @@
 #include "hal_defs.h"
 #include "hal_types.h"
 
-
-
+#ifdef OUTDOOR_LONG_RANGE
+#define HAL_PA_LNA_CC2592
+#define APP_TX_POWER TX_PWR_PLUS_19
+#endif
 
 
 
@@ -114,7 +116,7 @@
  */
 
 /* ----------- RF-frontend Connection Initialization ---------- */
-#if defined HAL_PA_LNA || defined HAL_PA_LNA_CC2590
+#ifdef HAL_PA_LNA_CC2592
 extern void MAC_RfFrontendSetup(void);
 #define HAL_BOARD_RF_FRONTEND_SETUP() MAC_RfFrontendSetup()
 #else
@@ -133,7 +135,42 @@ extern void MAC_RfFrontendSetup(void);
 #define PREFETCH_ENABLE()     st( FCTL = 0x08; )
 #define PREFETCH_DISABLE()    st( FCTL = 0x04; )
 
+
+
 /* ----------- Board Initialization ---------- */
+
+#ifdef HAL_PA_LNA_CC2592
+#define HAL_BOARD_INIT()                                         \
+{                                                                \
+  uint16 i;                                                      \
+                                                                 \
+  SLEEPCMD &= ~OSC_PD;                       /* turn on 16MHz RC and 32MHz XOSC */                \
+  while (!(SLEEPSTA & XOSC_STB));            /* wait for 32MHz XOSC stable */                     \
+  asm("NOP");                                /* chip bug workaround */                            \
+  for (i=0; i<504; i++) asm("NOP");          /* Require 63us delay for all revs */                \
+  CLKCONCMD = (CLKCONCMD_32MHZ | OSC_32KHZ); /* Select 32MHz XOSC and the source for 32K clock */ \
+  while (CLKCONSTA != (CLKCONCMD_32MHZ | OSC_32KHZ)); /* Wait for the change to be effective */   \
+  SLEEPCMD |= OSC_PD;                        /* turn off 16MHz RC */                              \
+                                                                 \
+  /* Turn on cache prefetch mode */                              \
+  PREFETCH_ENABLE();                                             \
+                                                                 \
+  /* set direction for GPIO outputs  */                          \
+  /* For SE2431L PA LNA this sets ANT_SEL to output */           \
+  /* For CC2592 this enables LNA */                              \
+  P1DIR |= BV(0) | BV(1);                                        \
+                                                                 \
+  /* Set PA/LNA HGM control P0_7 */                              \
+  /* P0DIR |= BV(7);   */                                              \
+                                                                 \
+                                                                 \
+  /* setup RF frontend if necessary */                           \
+  HAL_BOARD_RF_FRONTEND_SETUP();                                 \
+  HAL_TURN_OFF_LED1();                                           \
+  LED1_DDR |= LED1_BV;                                           \
+  LED4_DDR |= LED4_BV;                                         \
+}
+#else
 #define HAL_BOARD_INIT()                                         \
 {                                                                \
   uint16 i;                                                      \
@@ -152,6 +189,7 @@ extern void MAC_RfFrontendSetup(void);
   LED1_DDR |= LED1_BV;                                           \
   LED4_DDR |= LED4_BV;                                           \
 }
+#endif
 
 /* ----------- Debounce ---------- */
 #define HAL_DEBOUNCE(expr)    { int i; for (i=0; i<500; i++) { if (!(expr)) i = 0; } }
@@ -166,22 +204,14 @@ extern void MAC_RfFrontendSetup(void);
 
 /* ----------- LED's ---------- */
 
-#if defined(HAL_BOARD_FLOWER)
   #define LED1_BV           BV(1)
   #define LED1_SBIT         P0_1
   #define LED1_DDR          P0DIR
   #define LED1_POLARITY     ACTIVE_HIGH
 
-#elif defined(HAL_BOARD_CHDTECH_DEV)
-  #define LED1_BV           BV(0)
-  #define LED1_SBIT         P1_0
-  #define LED1_DDR          P1DIR
-  #define LED1_POLARITY     ACTIVE_LOW
-#endif
-
 //power pin
-#define LED4_BV           BV(1)
-#define LED4_SBIT         P1_1
+#define LED4_BV           BV(3)
+#define LED4_SBIT         P1_3
 #define LED4_DDR          P1DIR
 #define LED4_POLARITY     ACTIVE_HIGH
 
