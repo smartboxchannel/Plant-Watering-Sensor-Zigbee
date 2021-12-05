@@ -36,9 +36,9 @@
 
 // Global attributes
 const uint16 zclApp_clusterRevision_all = 0x0001;
-
+#ifndef PWS_MINI
 int16 zclApp_Temperature_Sensor_MeasuredValue = 0;
-
+#endif
 uint16 zclApp_SoilHumiditySensor_MeasuredValue = 0;
 uint16 zclApp_SoilHumiditySensor_MeasuredValue_old = 0;
 uint16 zclApp_SoilHumiditySensor_MeasuredValueTr = 1;
@@ -92,15 +92,19 @@ CONST zclAttrRec_t zclApp_AttrsFirstEP[] = {
     {POWER_CFG, {ATTRID_POWER_CFG_BATTERY_PERCENTAGE_REMAINING, ZCL_UINT8, RR, (void *)&zclBattery_PercentageRemainig}},
     {POWER_CFG, {ATTRID_POWER_CFG_BATTERY_VOLTAGE_RAW_ADC, ZCL_UINT16, RR, (void *)&zclBattery_RawAdc}},
 
+#ifndef PWS_MINI
     {TEMP, {ATTRID_MS_TEMPERATURE_MEASURED_VALUE, ZCL_INT16, RR, (void *)&zclApp_Temperature_Sensor_MeasuredValue}},
+#endif
 
 /**
  * FYI: ATTRID_POWER_CFG_BATTERY_VOLTAGE_RAW_ADC and ATTRID_MS_RELATIVE_HUMIDITY_MEASURED_VALUE_RAW_ADC
  * can be used to calculate relative humidity in converter
 */
-    {SOIL_HUMIDITY, {ATTRID_MS_RELATIVE_HUMIDITY_MEASURED_VALUE, ZCL_UINT16, RR, (void *)&zclApp_SoilHumiditySensor_MeasuredValue}},
-    {SOIL_HUMIDITY, {ATTRID_MS_RELATIVE_HUMIDITY_MEASURED_VALUE_RAW_ADC, ZCL_UINT16, RR, (void *)&zclApp_SoilHumiditySensor_MeasuredValueRawAdc}},
-    {SOIL_HUMIDITY, {ATTRID_MS_RELATIVE_HUMIDITY_MEASURED_VALUE_BATTERY_RAW_ADC, ZCL_UINT16, RR, (void *)&zclBattery_RawAdc}}
+#ifdef ZHA_COMPOTABLE
+    {HUMIDITY, {ATTRID_MS_RELATIVE_HUMIDITY_MEASURED_VALUE, ZCL_UINT16, RR, (void *)&zclApp_SoilHumiditySensor_MeasuredValue}}
+#else
+    {SOIL_HUMIDITY, {ATTRID_MS_RELATIVE_HUMIDITY_MEASURED_VALUE, ZCL_UINT16, RR, (void *)&zclApp_SoilHumiditySensor_MeasuredValue}}
+#endif
 };
 
 
@@ -121,7 +125,19 @@ const cId_t zclApp_OutClusterListFirstEP[] = {POWER_CFG, TEMP, SOIL_HUMIDITY};
 
 uint8 CONST zclApp_AttrsFirstEPCount = (sizeof(zclApp_AttrsFirstEP) / sizeof(zclApp_AttrsFirstEP[0]));
 
-const cId_t zclApp_InClusterListFirstEP[] = {ZCL_CLUSTER_ID_GEN_BASIC, POWER_CFG, TEMP, SOIL_HUMIDITY};
+#ifdef ZHA_COMPOTABLE
+#ifdef PWS_MINI
+    const cId_t zclApp_InClusterListFirstEP[] = {ZCL_CLUSTER_ID_GEN_BASIC, POWER_CFG, HUMIDITY};
+#else
+    const cId_t zclApp_InClusterListFirstEP[] = {ZCL_CLUSTER_ID_GEN_BASIC, POWER_CFG, TEMP, HUMIDITY};
+#endif
+#else
+#ifdef PWS_MINI
+    const cId_t zclApp_InClusterListFirstEP[] = {ZCL_CLUSTER_ID_GEN_BASIC, POWER_CFG, SOIL_HUMIDITY};
+#else
+    const cId_t zclApp_InClusterListFirstEP[] = {ZCL_CLUSTER_ID_GEN_BASIC, POWER_CFG, TEMP, SOIL_HUMIDITY};
+#endif
+#endif
 
 #define APP_MAX_INCLUSTERS_FIRST_EP (sizeof(zclApp_InClusterListFirstEP) / sizeof(zclApp_InClusterListFirstEP[0]))
 

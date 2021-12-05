@@ -14,7 +14,6 @@
 #include "zcl_app.h"
 #include "zcl_diagnostic.h"
 #include "zcl_general.h"
-//#include "zcl_lighting.h"
 #include "zcl_ms.h"
 
 #include "bdb.h"
@@ -163,6 +162,7 @@ uint16 zclApp_event_loop(uint8 task_id, uint16 events) {
     }
 
     if (events & APP_REPORT_EVT) {
+        osal_start_reload_timer(zclApp_TaskID, APP_REPORT_EVT, APP_REPORT_DELAY);
         LREPMaster("APP_REPORT_EVT\r\n");
         zclApp_Report();
         return (events ^ APP_REPORT_EVT);
@@ -171,7 +171,6 @@ uint16 zclApp_event_loop(uint8 task_id, uint16 events) {
     if (events & APP_READ_SENSORS_EVT) {
         LREPMaster("APP_READ_SENSORS_EVT\r\n");
         zclApp_ReadSensors();
-        pushBut = true;
         return (events ^ APP_READ_SENSORS_EVT);
     }
 
@@ -185,7 +184,13 @@ static void zclApp_HandleKeys(byte portAndAction, byte keyCode) {
     zclCommissioning_HandleKeys(portAndAction, keyCode);
     if (portAndAction & HAL_KEY_RELEASE) {
         LREPMaster("Key press\r\n");
-        osal_start_timerEx(zclApp_TaskID, APP_REPORT_EVT, 500);
+        if (bdbAttributes.bdbNodeIsOnANetwork){
+        osal_start_timerEx(zclApp_TaskID, APP_READ_SENSORS_EVT, 200);
+        }else{
+          osal_start_timerEx(zclApp_TaskID, APP_READ_SENSORS_EVT, 1000);
+        }
+        HalLedSet(HAL_LED_1, HAL_LED_MODE_BLINK);
+        pushBut = true;
     }
 }
 static void zclApp_InitPWM(void) {
@@ -214,7 +219,7 @@ static void zclApp_ReadSensors(void) {
      * FYI: split reading sensors into phases, so single call wouldn't block processor
      * for extensive ammount of time
      * */
-    HalLedSet(HAL_LED_1, HAL_LED_MODE_BLINK);
+    //HalLedSet(HAL_LED_1, HAL_LED_MODE_BLINK);
     switch (currentSensorsReadingPhase++) {
     case 0:
         START_PWS();
@@ -275,11 +280,19 @@ static void zclApp_ReadSoilHumidity(void) {
     if(!pushBut){
     if (abs(zclApp_SoilHumiditySensor_MeasuredValue - zclApp_SoilHumiditySensor_MeasuredValue_old) >= zclApp_SoilHumiditySensor_MeasuredValueTr *100) {
       zclApp_SoilHumiditySensor_MeasuredValue_old = zclApp_SoilHumiditySensor_MeasuredValue;
-      bdb_RepChangedAttrValue(zclApp_FirstEP.EndPoint, SOIL_HUMIDITY, ATTRID_MS_RELATIVE_HUMIDITY_MEASURED_VALUE);
+#ifdef ZHA_COMPOTABLE
+      bdb_RepChangedAttrValue(zclApp_FirstEP.EndPoint, HUMIDITY, ATTRID_MS_RELATIVE_HUMIDITY_MEASURED_VALUE); 
+#else
+      bdb_RepChangedAttrValue(zclApp_FirstEP.EndPoint, SOIL_HUMIDITY, ATTRID_MS_RELATIVE_HUMIDITY_MEASURED_VALUE); 
+#endif      
     }
     }else{
       zclApp_SoilHumiditySensor_MeasuredValue_old = zclApp_SoilHumiditySensor_MeasuredValue;
-      bdb_RepChangedAttrValue(zclApp_FirstEP.EndPoint, SOIL_HUMIDITY, ATTRID_MS_RELATIVE_HUMIDITY_MEASURED_VALUE);
+#ifdef ZHA_COMPOTABLE
+      bdb_RepChangedAttrValue(zclApp_FirstEP.EndPoint, HUMIDITY, ATTRID_MS_RELATIVE_HUMIDITY_MEASURED_VALUE);
+#else
+      bdb_RepChangedAttrValue(zclApp_FirstEP.EndPoint, SOIL_HUMIDITY, ATTRID_MS_RELATIVE_HUMIDITY_MEASURED_VALUE); 
+#endif   
     }
 }
 

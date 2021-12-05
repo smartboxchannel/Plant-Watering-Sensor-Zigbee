@@ -57,18 +57,20 @@ extern "C" {
 
 #define BASIC       ZCL_CLUSTER_ID_GEN_BASIC
 #define POWER_CFG   ZCL_CLUSTER_ID_GEN_POWER_CFG
+#ifndef PWS_MINI
 #define TEMP        ZCL_CLUSTER_ID_MS_TEMPERATURE_MEASUREMENT
+#endif
+#ifdef ZHA_COMPOTABLE
+#define HUMIDITY    ZCL_CLUSTER_ID_MS_RELATIVE_HUMIDITY
+#else
 #define SOIL_HUMIDITY                  0x0408
+#endif
 
 #define ZCL_UINT8   ZCL_DATATYPE_UINT8
 #define ZCL_UINT16  ZCL_DATATYPE_UINT16
 #define ZCL_UINT32  ZCL_DATATYPE_UINT32
 #define ZCL_INT16   ZCL_DATATYPE_INT16
 #define ZCL_INT8    ZCL_DATATYPE_INT8
-
-
-#define ATTRID_MS_RELATIVE_HUMIDITY_MEASURED_VALUE_RAW_ADC              0x0200
-#define ATTRID_MS_RELATIVE_HUMIDITY_MEASURED_VALUE_BATTERY_RAW_ADC      0x0201
 
 
 
@@ -85,7 +87,9 @@ extern SimpleDescriptionFormat_t zclApp_FirstEP;
 extern uint8 zclApp_BatteryVoltage;
 extern uint8 zclApp_BatteryPercentageRemainig;
 extern uint16 zclApp_BatteryVoltageRawAdc;
+#ifndef PWS_MINI
 extern int16 zclApp_Temperature_Sensor_MeasuredValue;
+#endif
 extern uint16 zclApp_SoilHumiditySensor_MeasuredValue;
 extern uint16 zclApp_SoilHumiditySensor_MeasuredValue_old;
 extern uint16 zclApp_SoilHumiditySensor_MeasuredValueTr;

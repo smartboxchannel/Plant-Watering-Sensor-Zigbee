@@ -44,17 +44,19 @@
 #define POWER_SAVING
 // #define DO_DEBUG_UART
 
-//#define PWS_MINI
+
+//#define ZHA_COMPOTABLE
+#define PWS_MINI
 //#define REPORT_0_5HOUR
-//#define REPORT_1HOUR
+#define REPORT_1HOUR
 //#define REPORT_1_5HOURS
-#define REPORT_2HOURS
+//#define REPORT_2HOURS
 //#define REPORT_3HOURS
 
 
 
 #ifdef PWS_MINI
-#define APP_TX_POWER TX_PWR_PLUS_2
+#define APP_TX_POWER TX_PWR_PLUS_3
 #endif
 
 #ifdef DO_DEBUG_UART
