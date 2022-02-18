@@ -18,11 +18,13 @@ Powered by SoC CC2530, the sensor is based on a capacitive measurement method. T
 More info at http://efektalab.com/eON_PWS_Z
 
 ---
-#### Old version
+#### Old standart version
 
 ![Plant-Watering-Sensor-Zigbee2](https://github.com/smartboxchannel/Plant-Watering-Sensor-Zigbee/blob/main/IMAGES/001.png) 
 
-![Plant-Watering-Sensor-Zigbee2](https://github.com/smartboxchannel/Plant-Watering-Sensor-Zigbee/blob/main/IMAGES/004.jpg) 
+![Plant-Watering-Sensor-Zigbee2](https://github.com/smartboxchannel/Plant-Watering-Sensor-Zigbee/blob/main/IMAGES/003.jpg) 
+
+#### New standart version
 
 ### Components:
 ##### (Soldering time: 10-15 minutes.)
