@@ -162,7 +162,6 @@ uint16 zclApp_event_loop(uint8 task_id, uint16 events) {
     }
 
     if (events & APP_REPORT_EVT) {
-        osal_start_reload_timer(zclApp_TaskID, APP_REPORT_EVT, APP_REPORT_DELAY);
         LREPMaster("APP_REPORT_EVT\r\n");
         zclApp_Report();
         return (events ^ APP_REPORT_EVT);
