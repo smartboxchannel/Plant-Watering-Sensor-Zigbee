@@ -17,6 +17,8 @@ Powered by SoC CC2530, the sensor is based on a capacitive measurement method. T
 
 #### Sale: https://www.tindie.com/products/diyberk/plant-watering-sensor-efekta-prozigbee/ (New pro version)
 
+### It is forbidden to manufacture devices for commercial sale, only for personal use.
+
 
 
 #### Video: https://youtu.be/DzgeWvG4MEI
