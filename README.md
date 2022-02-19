@@ -4,7 +4,7 @@
 ### Plant Watering Sensor Project for Zigbee Network 
 (in the beginning it was based on the Source Code of theDIYRUZ Flower Project - https://github.com/diyruz/flower)
 
-Powered by SoC CC2530, the sensor is based on a capacitive measurement method. The sensor is powered by a CR 2450 battery (CR 2477).
+Powered by SoC CC2530, the sensor is based on a capacitive measurement method. The sensor is powered by a CR 2032, CR2450, CR2477, ААА batteries.
 
 
 #### Donate to me: https://paypal.me/efektalab or just buy to support this project
