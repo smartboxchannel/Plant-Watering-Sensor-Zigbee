@@ -38,7 +38,7 @@ More info at http://efektalab.com/eON_PWS_Z
 ![Plant-Watering-Sensor-Zigbee2](https://github.com/smartboxchannel/Plant-Watering-Sensor-Zigbee/blob/main/IMAGES/003.jpg) 
 
 #### New standart version
-the firmware from the old version will not work correctly
+(the firmware from the old version will not work correctly)
 
 ![Plant-Watering-Sensor-Zigbee2](https://github.com/smartboxchannel/Plant-Watering-Sensor-Zigbee/blob/main/IMAGES/007.jpg) 
 
