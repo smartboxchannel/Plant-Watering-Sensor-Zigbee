@@ -1,5 +1,6 @@
 # Plant Watering Sensor EFEKTA PWS (Zigbee)
 (MINI, STANDART, MAX, PRO versions)
+### !!! It is forbidden to manufacture devices for commercial sale, only for personal use !!!
 
 ### Plant Watering Sensor Project for Zigbee Network 
 (in the beginning it was based on the Source Code of theDIYRUZ Flower Project - https://github.com/diyruz/flower)
@@ -17,7 +18,7 @@ Powered by SoC CC2530, the sensor is based on a capacitive measurement method. T
 
 #### Sale: https://www.tindie.com/products/diyberk/plant-watering-sensor-efekta-prozigbee/ (New pro version)
 
-### It is forbidden to manufacture devices for commercial sale, only for personal use.
+
 
 
 
