@@ -40,6 +40,12 @@ More info at http://efektalab.com/eON_PWS_Z
 
 ![Plant-Watering-Sensor-Zigbee2](https://github.com/smartboxchannel/Plant-Watering-Sensor-Zigbee/blob/main/IMAGES/006.jpg) 
 
+#### Max version
+
+![Plant-Watering-Sensor-Zigbee2](https://github.com/smartboxchannel/Plant-Watering-Sensor-Zigbee/blob/main/IMAGES/008.jpg) 
+
+![Plant-Watering-Sensor-Zigbee2](https://github.com/smartboxchannel/Plant-Watering-Sensor-Zigbee/blob/main/IMAGES/009.jpg) 
+
 ### Components:
 ##### (Soldering time: 10-15 minutes.)
 
