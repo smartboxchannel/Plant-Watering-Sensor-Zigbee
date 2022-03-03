@@ -14,9 +14,9 @@ Powered by SoC CC2530, the sensor is based on a capacitive measurement method. T
 
 #### Sale: https://www.tindie.com/products/diyberk/plant-watering-sensor-efekta-zigbee2mqtt/ (New standart version)
 
-#### Sale: https://www.tindie.com/products/diyberk/plant-watering-sensor-efekta-maxzigbee/ (New max version)
+#### Sale: https://www.tindie.com/products/diyberk/plant-watering-sensor-efekta-maxzigbee/ (Max version)
 
-#### Sale: https://www.tindie.com/products/diyberk/plant-watering-sensor-efekta-prozigbee/ (New pro version)
+#### Sale: https://www.tindie.com/products/diyberk/plant-watering-sensor-efekta-prozigbee/ (Pro version)
 
 
 
