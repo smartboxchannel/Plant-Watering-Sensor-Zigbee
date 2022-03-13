@@ -10,21 +10,19 @@ Powered by SoC CC2530, the sensor is based on a capacitive measurement method. T
 
 #### Donate to me: https://paypal.me/efektalab or just buy to support this project
 
-#### Sale: https://www.tindie.com/products/diyberk/mini-plant-watering-sensor-efekta-zigbee/ (Mini version)
+#### Sale: https://www.tindie.com/products/diyberk/mini-plant-watering-sensor-efekta-zigbee/ (Mini version) Tindie removed the product without explanation
 
-#### Sale: https://www.tindie.com/products/diyberk/plant-watering-sensor-efekta-zigbee2mqtt/ (New standart version)
+#### Sale: https://www.tindie.com/products/diyberk/plant-watering-sensor-efekta-zigbee2mqtt/ (New standart version) Tindie removed the product without explanation
 
-#### Sale: https://www.tindie.com/products/diyberk/plant-watering-sensor-efekta-maxzigbee/ (Max version)
+#### Sale: https://www.tindie.com/products/diyberk/plant-watering-sensor-efekta-maxzigbee/ (Max version) Tindie removed the product without explanation
 
-#### Sale: https://www.tindie.com/products/diyberk/plant-watering-sensor-efekta-prozigbee/ (Pro version)
+#### Sale: https://www.tindie.com/products/diyberk/plant-watering-sensor-efekta-prozigbee/ (Pro version) Tindie removed the product without explanation
 
-
+## To purchase sensors, write to hello@efektalab.com
 
 
 
 #### Video: https://youtu.be/DzgeWvG4MEI
-
-#### Telegram ZigDev - https://t.me/zigdev
 
 #### Telegram DiyDev - https://t.me/diy_devices
 
@@ -58,6 +56,8 @@ More info at http://efektalab.com/eON_PWS_Z
 
 ### Components:
 ##### (Soldering time: 10-15 minutes.)
+
+## I recommend ordering PCB here - https://www.pcbway.com/setinvite.aspx?inviteid=550959
 
 CC2530 E18-MS1-PCB - https://ali.ski/v8RP7i (10pcs)
 
