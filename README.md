@@ -2,6 +2,8 @@
 (MINI, STANDART, MAX, PRO versions)
 ### !!! It is forbidden to manufacture devices for commercial sale, only for personal use !!!
 
+### https://www.pcbway.com/setinvite.aspx?inviteid=550959
+
 ### Plant Watering Sensor Project for Zigbee Network 
 (in the beginning it was based on the Source Code of theDIYRUZ Flower Project - https://github.com/diyruz/flower)
 
