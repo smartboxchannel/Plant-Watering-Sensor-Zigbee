@@ -46,6 +46,8 @@ More info at http://efektalab.com/eON_PWS_Z
 
 ### You can make your own pcb here - https://www.pcbway.com/setinvite.aspx?inviteid=550959
 
+https://hackaday.io/project/181075-efekta-pws-zigbee
+
 ---
 #### Old standart version
 
