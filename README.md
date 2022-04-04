@@ -10,17 +10,31 @@
 Powered by SoC CC2530, the sensor is based on a capacitive measurement method. The sensor is powered by a CR 2032, CR2450, CR2477, ААА batteries.
 
 
-#### Donate to me: https://paypal.me/efektalab or just buy to support this project
+### Sale: 
 
-#### Sale: https://www.tindie.com/products/diyberk/mini-plant-watering-sensor-efekta-zigbee/ (Mini version) Tindie removed the product without explanation
+#### The cost of the device without the enclosure: 
 
-#### Sale: https://www.tindie.com/products/diyberk/plant-watering-sensor-efekta-zigbee2mqtt/ (New standart version) Tindie removed the product without explanation
+##### Mini version - $15.5
 
-#### Sale: https://www.tindie.com/products/diyberk/plant-watering-sensor-efekta-maxzigbee/ (Max version) Tindie removed the product without explanation
+##### Standart version - $15.5 
 
-#### Sale: https://www.tindie.com/products/diyberk/plant-watering-sensor-efekta-prozigbee/ (Pro version) Tindie removed the product without explanation
+##### Max version - $20.5 +(shtc3: temperature & humidity sensor | bh1750: light sensor)
 
-## To purchase sensors, write to hello@efektalab.com
+##### Pro version - $23.5 +(AAA battery| shtc3: temperature & humidity sensor | bh1750: light sensor)
+
+##### +$3 Long range radio module (for Pro version)
+
+##### +$7.5 Enclosure (for Mini, Standart, Max version)
+
+##### +$9.5 Enclosure (for Pro version)
+
+##### Delivery is $8.5, + $2 for each additional device in the order.
+
+##### Tracknumber for tracking.
+
+##### You can purchase a ready-made device by writing to the mail hello@efektalab.com
+
+##### Delivery is carried out worldwide.
 
 
 
@@ -29,6 +43,8 @@ Powered by SoC CC2530, the sensor is based on a capacitive measurement method. T
 #### Telegram DiyDev - https://t.me/diy_devices
 
 More info at http://efektalab.com/eON_PWS_Z
+
+### You can make your own pcb here - https://www.pcbway.com/setinvite.aspx?inviteid=550959
 
 ---
 #### Old standart version
