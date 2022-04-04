@@ -32,7 +32,7 @@ Powered by SoC CC2530, the sensor is based on a capacitive measurement method. T
 
 ##### Tracknumber for tracking.
 
-##### You can purchase a ready-made device by writing to the mail hello@efektalab.com
+##### You can buy a ready-made device by writing to the mail hello@efektalab.com
 
 ##### Delivery is carried out worldwide.
 
