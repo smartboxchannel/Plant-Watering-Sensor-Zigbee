@@ -172,7 +172,7 @@ https://github.com/sigma7i/zigbee-wiki/wiki/zigbee-firmware-install (RU)
 
 All configuration parameters are described in the Options section ( https://www.zigbee2mqtt.io/devices/EFEKTA_PWS.html )
 
-![Plant-Watering-Sensor-Zigbee2](https://github.com/smartboxchannel/Plant-Watering-Sensor-Zigbee/blob/main/IMAGES/2000.jpg) 
+![Plant-Watering-Sensor-Zigbee2](https://github.com/smartboxchannel/Plant-Watering-Sensor-Zigbee/blob/main/IMAGES/2000.png) 
 
 ### Troubleshooting
 
