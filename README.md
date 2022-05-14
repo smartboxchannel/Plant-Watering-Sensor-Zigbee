@@ -164,6 +164,16 @@ https://github.com/sigma7i/zigbee-wiki/wiki/zigbee-firmware-install (RU)
 4. Press the reset button on the device (the join procedure will begin, еhe device starts flashing the LED repeatedly)
 5. Wait, in case of successfull join, device will flash led 5 times, if join failed, device will flash led 2 times
 
+### How to configure:
+
+1.Open configuration.yaml in the editor. 
+2.Find the friendly_name of your device. 
+3.For example to add a temperature calibration you need to add the string temperature_calibration: 5. 
+
+All configuration parameters are described in the Options section ( https://www.zigbee2mqtt.io/devices/EFEKTA_PWS.html )
+
+![Plant-Watering-Sensor-Zigbee2](https://github.com/smartboxchannel/Plant-Watering-Sensor-Zigbee/blob/main/IMAGES/2000.jpg) 
+
 ### Troubleshooting
 
 If a device does not connect to your coordinator, please try the following:
