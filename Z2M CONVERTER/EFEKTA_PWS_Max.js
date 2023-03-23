@@ -21,6 +21,19 @@ const tzLocal = {
             };
         },
     },
+	temperaturef_config: {
+        key: ['temperature_offset'],
+        convertSet: async (entity, key, rawValue, meta) => {
+            const value = parseFloat(rawValue)*10;
+            const payloads = {
+                temperature_offset: ['msTemperatureMeasurement', {0x0410: {value, type: 0x29}}],
+            };
+            await entity.write(payloads[key][0], payloads[key][1]);
+            return {
+                state: {[key]: rawValue},
+            };
+        },
+    },
 };
 
 const fzLocal = {
@@ -35,33 +48,36 @@ const fzLocal = {
             return result;
         },
     },
+	temperaturef_config: {
+        cluster: 'msTemperatureMeasurement',
+        type: ['attributeReport', 'readResponse'],
+        convert: (model, msg, publish, options, meta) => {
+            const result = {};
+            if (msg.data.hasOwnProperty(0x0410)) {
+                result.temperature_offset = parseFloat(msg.data[0x0410])/10.0;
+            }
+            return result;
+        },
+    },
 };
 
 const definition = {
         zigbeeModel: ['EFEKTA_PWS_Max'],
-        model: 'EFEKTA_PWS_MaxPro',
+        model: 'EFEKTA_PWS_Max',
         vendor: 'Custom devices (DiY)',
-        description: '[Plant Wattering Sensor EFEKTA_PWS_Max]',
-        fromZigbee: [fz.temperature, fz.humidity, fz.illuminance, fz.soil_moisture, fz.battery, fzLocal.node_config],
-        toZigbee: [tz.factory_reset, tzLocal.node_config],
+        description: '[Plant watering sensor EFEKTA PWS max](http://efektalab.com/PWS_Max)',
+        fromZigbee: [fz.temperature, fz.humidity, fz.illuminance, fz.soil_moisture, fz.battery, fzLocal.node_config, fzLocal.temperaturef_config],
+        toZigbee: [tz.factory_reset, tzLocal.node_config, tzLocal.temperaturef_config],
         configure: async (device, coordinatorEndpoint, logger) => {
             const firstEndpoint = device.getEndpoint(1);
             await reporting.bind(firstEndpoint, coordinatorEndpoint, [
-                'genPowerCfg', 'msTemperatureMeasurement', 'msRelativeHumidity', 'msIlluminanceMeasurement', 'msSoilMoisture']);
-            const overides = {min: 0, max: 43200, change: 0};
-            await reporting.batteryVoltage(firstEndpoint, overides);
-            await reporting.batteryPercentageRemaining(firstEndpoint, overides);
-            await reporting.temperature(firstEndpoint, overides);
-            await reporting.humidity(firstEndpoint, overides);
-            await reporting.illuminance(firstEndpoint, overides);
-            await reporting.soil_moisture(firstEndpoint, overides);
-			const payload1 = [{attribute: {ID: 0x0201, type: 0x21},
-            minimumReportInterval: 0, maximumReportInterval: 21600, reportableChange: 0}];
-            await firstEndpoint.configureReporting('genPowerCfg', payload1);
+                'genPowerCfg', 'msTemperatureMeasurement', 'msRelativeHumidity', 'msSoilMoisture', 'msIlluminanceMeasurement']);
         },
-        exposes: [e.soil_moisture(), e.battery(), e.illuminance(), e.temperature(), e.humidity(),
-        exposes.numeric('report_delay', ea.STATE_SET).withUnit('Minutes').withDescription('Adjust Report Delay. Setting the time in minutes, by default 30 minutes')
-                .withValueMin(1).withValueMax(240)],
+        exposes: [e.soil_moisture(), e.battery(), e.battery_low(), e.battery_voltage(), e.temperature(), e.humidity(), e.illuminance(), e.illuminance_lux(),
+		    exposes.numeric('report_delay', ea.STATE_SET).withUnit('Minutes').withDescription('Adjust Report Delay. Setting the time in minutes, by default 30 minutes')
+                .withValueMin(1).withValueMax(360),
+		    exposes.numeric('temperature_offset', ea.STATE_SET).withUnit('°C').withValueStep(0.1).withDescription('Adjust temperature')
+                .withValueMin(-50.0).withValueMax(50.0)],
 };
 
 module.exports = definition;
