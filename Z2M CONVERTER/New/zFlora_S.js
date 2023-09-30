@@ -120,11 +120,6 @@ const definition = {
                 .withValueMin(1).withValueMax(100),
 		    exposes.numeric('temperature_offset', ea.STATE_SET).withUnit('°C').withValueStep(0.1).withDescription('Adjust temperature')
                 .withValueMin(-50.0).withValueMax(50.0)],
-				//.withValueMin(-50.0).withValueMax(50.0),
-			//exposes.numeric('bat_adc', ea.STATE).withDescription('Battery RAW Data'),
-			//exposes.numeric('sm_adc', ea.STATE).withDescription('SM RAW Data'),
-			//exposes.numeric('sm_adc_compens', ea.STATE).withDescription('SM RAW Compensated Data')],
-			  .withValueMin(-50.0).withValueMax(50.0)],
 };
 
 module.exports = definition;
