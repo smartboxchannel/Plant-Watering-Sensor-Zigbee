@@ -48,6 +48,8 @@ More info at http://efektalab.com/eON_PWS_Z
 
 https://hackaday.io/project/181075-efekta-pws-zigbee
 
+Thank the author: http://www.donationalerts.ru/r/EfektaLab
+
 ---
 #### Old standart version
 
