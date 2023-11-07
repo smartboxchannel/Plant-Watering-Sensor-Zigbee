@@ -101,10 +101,10 @@ const definition = {
             const firstEndpoint = device.getEndpoint(1);
             await reporting.bind(firstEndpoint, coordinatorEndpoint, [
                 'genPowerCfg', 'msTemperatureMeasurement', 'msRelativeHumidity', 'msSoilMoisture', 'msIlluminanceMeasurement']);
-			const overrides1 = {min: 3600, max: 43200, change: 1};
-			const overrides2 = {min: 300, max: 3600, change: 25};
-			const overrides3 = {min: 300, max: 3600, change: 50};
-			const overrides5 = {min: 60, max: 21600, change: 100};
+			const overrides1 = {min: 0, max: 21600, change: 1};
+			const overrides2 = {min: 0, max: 3600, change: 10};
+			const overrides3 = {min: 0, max: 3600, change: 10};
+			const overrides5 = {min: 0, max: 21600, change: 100};
             await reporting.batteryVoltage(firstEndpoint, overrides1);
             await reporting.batteryPercentageRemaining(firstEndpoint, overrides1);
 			await reporting.batteryAlarmState(firstEndpoint, overrides1);
