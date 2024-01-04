@@ -2,6 +2,10 @@
 (MINI, STANDART, MAX, PRO versions)
 ### !!! It is forbidden to manufacture devices for commercial sale, only for personal use !!!
 
+Телеграм чат DIY Devices - https://t.me/diy_devices
+
+Продажа DIY Устройств - https://t.me/diydevmart
+
 ### Ordering PCB - https://www.pcbway.com/setinvite.aspx?inviteid=550959
 
 ### Plant Watering Sensor Project for Zigbee Network 
