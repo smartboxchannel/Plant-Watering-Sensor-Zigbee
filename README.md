@@ -2,6 +2,10 @@
 (MINI, STANDART, MAX, PRO versions)
 ### !!! It is forbidden to manufacture devices for commercial sale, only for personal use !!!
 
+Поблагодарить автора: https://www.donationalerts.com/r/efektalab
+
+Thank the author: http://www.donationalerts.ru/r/EfektaLab
+
 Телеграм чат DIY Devices - https://t.me/diy_devices
 
 Продажа DIY Устройств - https://t.me/diydevmart
@@ -44,15 +48,10 @@ Powered by SoC CC2530, the sensor is based on a capacitive measurement method. T
 
 #### Video: https://youtu.be/DzgeWvG4MEI
 
-#### Telegram DiyDev - https://t.me/diy_devices
-
-More info at http://efektalab.com/eON_PWS_Z
-
 ### You can make your own pcb here - https://www.pcbway.com/setinvite.aspx?inviteid=550959
 
 https://hackaday.io/project/181075-efekta-pws-zigbee
 
-Thank the author: http://www.donationalerts.ru/r/EfektaLab
 
 ---
 #### Old standart version
