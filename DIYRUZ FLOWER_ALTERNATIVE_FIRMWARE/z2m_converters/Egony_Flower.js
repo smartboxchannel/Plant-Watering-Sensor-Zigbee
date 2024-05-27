@@ -7,14 +7,14 @@ const ea = exposes.access;
 
 const tzLocal = {
     node_config: {
-        key: ['read_sensors_delay', 'pool_rate_on'],
+        key: ['read_sensors_delay', 'poll_rate_on'],
         convertSet: async (entity, key, rawValue, meta) => {
 			const endpoint = meta.device.getEndpoint(2);
             const lookup = {'OFF': 0x00, 'ON': 0x01};
             const value = lookup.hasOwnProperty(rawValue) ? lookup[rawValue] : parseInt(rawValue, 10);
             const payloads = {
                 read_sensors_delay: ['genPowerCfg', {0x0201: {value, type: 0x21}}],
-				pool_rate_on: ['genPowerCfg', {0x0216: {value, type: 0x10}}],
+				poll_rate_on: ['genPowerCfg', {0x0216: {value, type: 0x10}}],
             };
             await endpoint.write(payloads[key][0], payloads[key][1]);
             return {
@@ -68,7 +68,7 @@ const fzLocal = {
                 result.read_sensors_delay = msg.data[0x0201];
             }
 			if (msg.data.hasOwnProperty(0x0216)) {
-                result.pool_rate_on = ['OFF', 'ON'][msg.data[0x0216]];
+                result.poll_rate_on = ['OFF', 'ON'][msg.data[0x0216]];
             }
             return result;
         },
@@ -148,7 +148,7 @@ const definition = {
         exposes: [e.soil_moisture(), e.battery(), e.battery_low(), e.battery_voltage(), e.temperature(), e.illuminance(),
 		    exposes.numeric('read_sensors_delay', ea.STATE_SET).withUnit('Minutes').withDescription('Adjust Report Delay. Setting the time in minutes, by default 30 minutes')
                 .withValueMin(1).withValueMax(360),
-			exposes.binary('pool_rate_on', ea.STATE_SET, 'ON', 'OFF').withDescription('Pool rate on off'),
+			exposes.binary('poll_rate_on', ea.STATE_SET, 'ON', 'OFF').withDescription('Poll rate on off'),
 			exposes.numeric('uptime', ea.STATE).withUnit('Hours').withDescription('Uptime'),
 			exposes.numeric('lower_level', ea.STATE_SET).withUnit('%').withDescription('The lower level of soil moisture 0% is:')
                 .withValueMin(0).withValueMax(99),
