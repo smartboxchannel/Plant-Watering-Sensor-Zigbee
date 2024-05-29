@@ -7,7 +7,7 @@ const ea = exposes.access;
 
 const tzLocal = {
     node_config: {
-        key: ['read_sensors_delay', 'poll_rate_on'],
+        key: ['read_sensors_delay', 'poll_rate_on', 'tx_radio_power'],
         convertSet: async (entity, key, rawValue, meta) => {
 			const endpoint = meta.device.getEndpoint(2);
             const lookup = {'OFF': 0x00, 'ON': 0x01};
@@ -15,6 +15,7 @@ const tzLocal = {
             const payloads = {
                 read_sensors_delay: ['genPowerCfg', {0x0201: {value, type: 0x21}}],
 				poll_rate_on: ['genPowerCfg', {0x0216: {value, type: 0x10}}],
+				tx_radio_power: ['genPowerCfg', {0x0236: {value, type: 0x28}}],
             };
             await endpoint.write(payloads[key][0], payloads[key][1]);
             return {
@@ -69,6 +70,9 @@ const fzLocal = {
             }
 			if (msg.data.hasOwnProperty(0x0216)) {
                 result.poll_rate_on = ['OFF', 'ON'][msg.data[0x0216]];
+            }
+			if (msg.data.hasOwnProperty(0x0236)) {
+                result.tx_radio_power = msg.data[0x0236];
             }
             return result;
         },
@@ -135,8 +139,8 @@ const definition = {
                 'msIlluminanceMeasurement']);
 			const overrides1 = {min: 3600, max: 43200, change: 1};
 			const overrides2 = {min: 60, max: 3600, change: 25};
-			const overrides3 = {min: 60, max: 1800, change: 50};
-			const overrides4 = {min: 60, max: 10800, change: 100};
+			const overrides3 = {min: 300, max: 1800, change: 50};
+			const overrides4 = {min: 300, max: 10800, change: 100};
             await reporting.batteryVoltage(endpoint2, overrides1);
             await reporting.batteryPercentageRemaining(endpoint2, overrides1);
 			await reporting.batteryAlarmState(endpoint2, overrides1);
@@ -148,6 +152,7 @@ const definition = {
         exposes: [e.soil_moisture(), e.battery(), e.battery_low(), e.battery_voltage(), e.temperature(), e.illuminance(),
 		    exposes.numeric('read_sensors_delay', ea.STATE_SET).withUnit('Minutes').withDescription('Adjust Report Delay. Setting the time in minutes, by default 30 minutes')
                 .withValueMin(1).withValueMax(360),
+			exposes.enum('tx_radio_power', ea.STATE_SET, [-4, 0, 4]).withDescription('Set TX Radio Power)'),
 			exposes.binary('poll_rate_on', ea.STATE_SET, 'ON', 'OFF').withDescription('Poll rate on off'),
 			exposes.numeric('uptime', ea.STATE).withUnit('Hours').withDescription('Uptime'),
 			exposes.numeric('lower_level', ea.STATE_SET).withUnit('%').withDescription('The lower level of soil moisture 0% is:')
