@@ -1,3 +1,9 @@
+// ############################################################################//
+//                                                                             //
+//    ... перезагрузить z2m, что бы конвертер применился                       //
+//                                                                             //
+//#############################################################################//
+
 const fz = require('zigbee-herdsman-converters/converters/fromZigbee');
 const tz = require('zigbee-herdsman-converters/converters/toZigbee');
 const exposes = require('zigbee-herdsman-converters/lib/exposes');
@@ -14,7 +20,7 @@ const tzLocal = {
             const value = lookup.hasOwnProperty(rawValue) ? lookup[rawValue] : parseInt(rawValue, 10);
             const payloads = {
                 read_sensors_delay: ['genPowerCfg', {0x0201: {value, type: 0x21}}],
-				poll_rate_on: ['genPowerCfg', {0x0216: {value, type: 0x10}}],
+				smart_sleep: ['genPowerCfg', {0x0216: {value, type: 0x10}}],
 				tx_radio_power: ['genPowerCfg', {0x0236: {value, type: 0x28}}],
             };
             await endpoint.write(payloads[key][0], payloads[key][1]);
@@ -69,7 +75,7 @@ const fzLocal = {
                 result.read_sensors_delay = msg.data[0x0201];
             }
 			if (msg.data.hasOwnProperty(0x0216)) {
-                result.poll_rate_on = ['OFF', 'ON'][msg.data[0x0216]];
+                result.smart_sleep = ['OFF', 'ON'][msg.data[0x0216]];
             }
 			if (msg.data.hasOwnProperty(0x0236)) {
                 result.tx_radio_power = msg.data[0x0236];
@@ -87,6 +93,15 @@ const fzLocal = {
             }
 			if (msg.data.hasOwnProperty(0x0503)) {
                 result.upper_level = msg.data[0x0503];
+            }
+			if (msg.data.hasOwnProperty(0x0500)) {
+                result.one = msg.data[0x0500];
+            }
+			if (msg.data.hasOwnProperty(0x0501)) {
+                result.two = msg.data[0x0501];
+            }
+			if (msg.data.hasOwnProperty(0x0499)) {
+                result.three = msg.data[0x0499];
             }
             return result;
         },
@@ -112,7 +127,6 @@ const fzLocal = {
         cluster: 'genTime',
         type: ['attributeReport', 'readResponse'],
         convert: (model, msg, publish, options, meta) => {
-            //return {uptime: Math.round(msg.data.localTime/60)};
 			if (msg.data.hasOwnProperty('standardTime')) {
 				return {uptime: Math.round(msg.data.standardTime/60/60)};
 			}
@@ -121,8 +135,8 @@ const fzLocal = {
 };
 
 const definition = {
-        zigbeeModel: ['Egony_Flower'],
-        model: 'Egony_Flower',
+        zigbeeModel: ['EFEKTA_Egony_Flower'],
+        model: 'EFEKTA_Egony_Flower',
         vendor: 'EFEKTA',
         description: '[Soil moisture sensor Egony_Flower, mod DIYRuZ Flower](http://efektalab.com/Egony_Flower)',
         fromZigbee: [fz.temperature, fz.illuminance, fz.soil_moisture, fz.battery, fzLocal.node_config, fzLocal.node_debug, fzLocal.temperaturef_config, fzLocal.uptime],
@@ -137,10 +151,10 @@ const definition = {
                 'genPowerCfg', 'msSoilMoisture']);
 			await reporting.bind(endpoint3, coordinatorEndpoint, [
                 'msIlluminanceMeasurement']);
-			const overrides1 = {min: 3600, max: 43200, change: 1};
+			const overrides1 = {min: 7200, max: 43200, change: 1};
 			const overrides2 = {min: 60, max: 3600, change: 25};
-			const overrides3 = {min: 300, max: 1800, change: 50};
-			const overrides4 = {min: 300, max: 10800, change: 100};
+			const overrides3 = {min: 60, max: 1800, change: 50};
+			const overrides4 = {min: 60, max: 10800, change: 100};
             await reporting.batteryVoltage(endpoint2, overrides1);
             await reporting.batteryPercentageRemaining(endpoint2, overrides1);
 			await reporting.batteryAlarmState(endpoint2, overrides1);
@@ -153,7 +167,7 @@ const definition = {
 		    exposes.numeric('read_sensors_delay', ea.STATE_SET).withUnit('Minutes').withDescription('Adjust Report Delay. Setting the time in minutes, by default 3 minutes')
                 .withValueMin(1).withValueMax(360),
 			exposes.enum('tx_radio_power', ea.STATE_SET, [-4, 0, 4]).withDescription('Set TX Radio Power)'),
-			exposes.binary('poll_rate_on', ea.STATE_SET, 'ON', 'OFF').withDescription('Poll rate on off'),
+			exposes.binary('smart_sleep', ea.STATE_SET, 'ON', 'OFF').withDescription('Poll rate on off'),
 			exposes.numeric('uptime', ea.STATE).withUnit('Hours').withDescription('Uptime'),
 			exposes.numeric('lower_level', ea.STATE_SET).withUnit('%').withDescription('The lower level of soil moisture 0% is:')
                 .withValueMin(0).withValueMax(99),
