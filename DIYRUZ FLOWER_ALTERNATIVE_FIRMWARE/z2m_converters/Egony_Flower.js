@@ -152,9 +152,9 @@ const definition = {
 			await reporting.bind(endpoint3, coordinatorEndpoint, [
                 'msIlluminanceMeasurement']);
 			const overrides1 = {min: 7200, max: 43200, change: 1};
-			const overrides2 = {min: 60, max: 3600, change: 25};
+			const overrides2 = {min: 60, max: 3600, change: 10};
 			const overrides3 = {min: 60, max: 1800, change: 50};
-			const overrides4 = {min: 60, max: 10800, change: 100};
+			const overrides4 = {min: 60, max: 10800, change: 10};
             await reporting.batteryVoltage(endpoint2, overrides1);
             await reporting.batteryPercentageRemaining(endpoint2, overrides1);
 			await reporting.batteryAlarmState(endpoint2, overrides1);
