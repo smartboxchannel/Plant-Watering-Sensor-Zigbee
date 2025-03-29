@@ -1,2 +1,5 @@
-Отблагодарить автора: http://www.donationalerts.ru/r/EfektaLab
-Thank the author: http://www.donationalerts.ru/r/EfektaLab
+Поблагодарить автора: https://yoomoney.ru/fundraise/P2XLTgJsB6k.231012
+
+Thank the author: https://yoomoney.ru/fundraise/P2XLTgJsB6k.231012
+
+Описание:
