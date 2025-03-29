@@ -18,28 +18,6 @@ Thank the author: https://yoomoney.ru/fundraise/P2XLTgJsB6k.231012
 Powered by SoC CC2530, the sensor is based on a capacitive measurement method. The sensor is powered by a CR 2032, CR2450, CR2477, ААА batteries.
 
 
-### Sale: 
-
-#### The cost of the device without the enclosure: 
-
-##### Mini version - $15.5
-
-##### Standart version - $15.5 
-
-##### Max version - $20.5 +(shtc3: temperature & humidity sensor | bh1750: light sensor)
-
-##### Pro version - $23.5 +(AAA battery| shtc3: temperature & humidity sensor | bh1750: light sensor)
-
-##### +$3 Long range radio module (for Pro version)
-
-##### +$7.5 Enclosure (for Mini, Standart, Max version)
-
-##### +$9.5 Enclosure (for Pro version)
-
-##### Delivery is $8.5, + $2 for each additional device in the order.
-
-##### Tracknumber for tracking.
-
 ##### You can buy a ready-made device by writing to the mail hello@efektalab.com
 
 ##### Delivery is carried out worldwide.
